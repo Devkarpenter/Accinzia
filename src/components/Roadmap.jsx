@@ -33,7 +33,7 @@ export default function Roadmap() {
   ];
 
   return (
-    <section className="relative w-full py-20 px-4 overflow-hidden">
+    <section className="reveal relative w-full py-20 px-4 overflow-hidden">
       {/* Add keyframe animation styles */}
       <style jsx>{`
         @keyframes dash-horizontal {

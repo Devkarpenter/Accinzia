@@ -1,0 +1,33 @@
+/* Scroll reveal base styles */
+.reveal-init {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 700ms cubic-bezier(.2,.9,.2,1), transform 700ms cubic-bezier(.2,.9,.2,1);
+	will-change: opacity, transform;
+}
+.reveal-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Optional subtle fade-in-left variant */
+.reveal-left.reveal-init {
+	transform: translateX(-24px);
+}
+.reveal-left.reveal-visible {
+	transform: translateX(0);
+}
+
+/* Optional subtle fade-in-right variant */
+.reveal-right.reveal-init {
+	transform: translateX(24px);
+}
+.reveal-right.reveal-visible {
+	transform: translateX(0);
+}
+
+/* Utility to stagger children: add this on the container to stagger child .reveal elements */
+.reveal-stagger .reveal {
+	transition-delay: var(--reveal-delay, 0ms);
+}
+

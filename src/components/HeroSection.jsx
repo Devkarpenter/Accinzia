@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section className="pt-32 pb-16 px-4 min-h-[600px] flex items-center">
+    <section className="reveal pt-32 pb-16 px-4 min-h-[600px] flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Content */}

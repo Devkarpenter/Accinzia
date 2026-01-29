@@ -23,7 +23,7 @@ export default function Contact() {
   }
 
   return (
-    <main className="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
+    <main className="reveal flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
       <h1 className="text-5xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Contact Us</h1>
       <p className="text-xl text-gray-300 text-center mb-12">
         Have a question? We'd love to hear from you. Get in touch with us today.

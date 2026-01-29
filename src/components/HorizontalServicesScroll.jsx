@@ -1,196 +1,154 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function HorizontalServicesScroll() {
-  const scrollContainerRef = useRef(null)
-  const [isAutoScroll, setIsAutoScroll] = useState(true)
-  const animationRef = useRef(null)
-  const scrollSpeedRef = useRef(1)
+  const scrollRef = useRef(null);
+  const animationRef = useRef(null);
+  const [paused, setPaused] = useState(false);
 
   const services = [
     {
-      id: 1,
       title: "Private Limited Company",
-      description: "Register and establish your private limited company with complete compliance and legal documentation",
-      icon: "🏢"
+      description: "Register and establish your private limited company with full legal compliance.",
+      icon: "🏢",
+      path: "/services/company-incorporation",
     },
     {
-      id: 2,
       title: "One Person Company",
-      description: "Start your OPC with minimal formalities and solo entrepreneurship benefits",
-      icon: "👤"
+      description: "Start your OPC with minimal formalities and solo ownership benefits.",
+      icon: "👤",
+      path: "/services/company-incorporation",
     },
     {
-      id: 3,
       title: "Limited Liability Partnership",
-      description: "Form an LLP structure combining partnership flexibility with corporate liability protection",
-      icon: "🤝"
+      description: "Flexible partnership with corporate-level liability protection.",
+      icon: "🤝",
+      path: "/services/company-incorporation",
     },
     {
-      id: 4,
       title: "Sole Proprietorship",
-      description: "Register as a sole proprietor with simplified business setup and operations",
-      icon: "📋"
+      description: "Simplified registration for individual entrepreneurs.",
+      icon: "📋",
+      path: "/services/company-incorporation",
     },
     {
-      id: 5,
-      title: "Partnership Firm",
-      description: "Establish a partnership with clear agreements and legal protections",
-      icon: "👥"
-    },
-    {
-      id: 6,
       title: "Startup India Certification",
-      description: "Get certified and unlock benefits including tax exemptions and funding access",
-      icon: "🚀"
+      description: "Unlock tax exemptions, funding access, and government benefits.",
+      icon: "🚀",
+      path: "/services/startup-india",
     },
     {
-      id: 7,
       title: "Seed Fund Application",
-      description: "Assistance in applying for seed funding and grants for your startup",
-      icon: "💰"
+      description: "End-to-end support for startup seed fund applications.",
+      icon: "💰",
+      path: "/services/startup-india",
     },
     {
-      id: 8,
       title: "Tax Exemption Planning",
-      description: "Optimize your taxes and avail exemptions available for your business structure",
-      icon: "📊"
+      description: "Smart tax planning and compliance strategies.",
+      icon: "📊",
+      path: "/services/compliances",
     },
     {
-      id: 9,
       title: "Trademark Registration",
-      description: "Protect your brand with professional trademark registration and legal support",
-      icon: "™️"
+      description: "Protect your brand with expert trademark services.",
+      icon: "™️",
+      path: "/services/trademark",
     },
-    {
-      id: 10,
-      title: "Trademark Renewal",
-      description: "Renew and maintain your trademark registrations online with our expert assistance",
-      icon: "🔄"
-    }
-  ]
+  ];
 
-  // Duplicate services for infinite scroll effect
-  const infiniteServices = [...services, ...services, ...services]
+  const items = [...services, ...services];
 
   useEffect(() => {
-    if (!isAutoScroll || !scrollContainerRef.current) return
-
-    const container = scrollContainerRef.current
-    const singleSetWidth = container.scrollWidth / 3 // Width of one complete set
+    const container = scrollRef.current;
+    if (!container) return;
 
     const animate = () => {
-      if (container.scrollLeft >= singleSetWidth * 0.95) {
-        container.scrollLeft = 0
-      } else {
-        container.scrollLeft += scrollSpeedRef.current
+      if (!paused) {
+        container.scrollLeft += 0.6;
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
       }
-      animationRef.current = requestAnimationFrame(animate)
-    }
+      animationRef.current = requestAnimationFrame(animate);
+    };
 
-    animationRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [isAutoScroll])
-
-  const scroll = (direction) => {
-    const container = scrollContainerRef.current
-    if (container) {
-      const scrollAmount = 400
-      if (direction === 'left') {
-        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-      } else {
-        container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-      }
-    }
-    // Pause auto-scroll when user manually scrolls
-    setIsAutoScroll(false)
-    setTimeout(() => setIsAutoScroll(true), 5000) // Resume after 5 seconds
-  }
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
+  }, [paused]);
 
   return (
-    <section className="py-16 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Our Services
+    <section
+      className="reveal py-20"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Heading */}
+        <div className="text-center mb-14">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent tracking-wider">
+              OUR SERVICES
             </span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Comprehensive business solutions designed to help your company grow and succeed
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Business-focused services crafted to help you launch, protect, and scale with confidence.
           </p>
         </div>
 
-        {/* Horizontal Scroll Container */}
-        <div className="relative group">
-          {/* Left Scroll Button */}
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition transform hover:scale-110 opacity-0 group-hover:opacity-100"
-            aria-label="Scroll left"
-          >
-            ← Scroll
-          </button>
+        {/* Scroll Container */}
+        <div
+          ref={scrollRef}
+          className="flex gap-8 px-2 pt-8 pb-12 no-scrollbar"
+        >
+          {items.map((service, index) => (
+            <div
+              key={index}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              className="flex-shrink-0 w-80 rounded-2xl
+                         bg-gradient-to-br from-slate-800/80 to-slate-900/80
+                         border border-white/10 backdrop-blur-xl
+                         p-8 transition-all duration-300
+                         hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20"
+            >
+              <div className="text-4xl mb-4">{service.icon}</div>
 
-          {/* Services Container */}
-          <div
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto pb-4 px-16 scrollbar-hide"
-            style={{
-              scrollBehavior: 'auto',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
-            {infiniteServices.map((service, index) => (
-              <div
-                key={`${service.id}-${index}`}
-                className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-xl p-8 hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-500/20 transition transform hover:scale-105 group cursor-pointer"
+              <h3 className="text-xl font-semibold text-white mb-3">
+                {service.title}
+              </h3>
+
+              <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                {service.description}
+              </p>
+
+              <Link
+                to={service.path}
+                className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition"
               >
-                <div className="text-5xl mb-4 group-hover:scale-125 transition">{service.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition">
-                  {service.title}
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-4">
-                  {service.description}
-                </p>
-                <button className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-2 group-hover:translate-x-2 transition">
-                  Learn More →
-                </button>
-              </div>
-            ))}
-          </div>
-
-          {/* Right Scroll Button */}
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition transform hover:scale-110 opacity-0 group-hover:opacity-100"
-            aria-label="Scroll right"
-          >
-            Scroll →
-          </button>
+                Learn more →
+              </Link>
+            </div>
+          ))}
         </div>
 
-        {/* Info Text */}
-        <p className="text-center text-gray-500 text-sm mt-8">
-          Auto-scrolling services • Hover over the section to see manual scroll buttons
+        {/* Helper Text */}
+        <p className="text-center text-gray-500 text-sm mt-6">
+          Auto-scroll pauses on hover • Click a card to explore
         </p>
       </div>
 
-      {/* Custom Scrollbar Styling - Hidden */}
+      {/* Scrollbar Kill */}
       <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
+        .no-scrollbar {
+          overflow-x: scroll;
           scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </section>
-  )
+  );
 }
