@@ -1,4 +1,31 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
+/* =====================
+   Animation Variants
+===================== */
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.2,
+    },
+  },
+};
 
 export default function ServicesIndex() {
   const navigate = useNavigate();
@@ -60,27 +87,43 @@ export default function ServicesIndex() {
   ];
 
   return (
-    <section className="pt-36 pb-28">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Heading */}
-        <div className="text-center mb-20">
-          <p className="tracking-[0.35em] font-semibold text-[#00b3b6] mb-4">
-            OUR SERVICES
+    <section className="pt-40 pb-32 px-4">
+      <div className="max-w-7xl mx-auto">
+
+        {/* ================= HEADER ================= */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          className="text-center mb-24"
+        >
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent tracking-wide">
+              OUR SERVICES
+            </span>
+          </h1>
+
+          <div className="w-32 h-[2px] bg-[#00b3b6] mx-auto mb-8 shadow-[0_0_18px_rgba(0,179,182,0.8)]" />
+
+          <p className="text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed">
+            End-to-end business services crafted to help you launch, protect,
+            and scale your company with confidence.
           </p>
+        </motion.div>
 
-          <div className="w-32 h-[2px] bg-[#00b3b6] mx-auto mb-6 shadow-[0_0_20px_#00b3b6]" />
-
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            End-to-end business services designed to launch, protect, and scale
-            your company with confidence.
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* ================= GRID ================= */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.4 }}
               onClick={() => navigate(service.path)}
               className="
                 group cursor-pointer
@@ -88,14 +131,13 @@ export default function ServicesIndex() {
                 bg-gradient-to-br from-slate-900/70 to-slate-950/80
                 backdrop-blur-xl
                 border border-[#00b3b6]/25
-                transition-all duration-500
-                hover:-translate-y-2
                 hover:border-[#00b3b6]
                 hover:shadow-2xl hover:shadow-[#00b3b6]/30
+                transition-all
               "
             >
               {/* Icon */}
-              <div className="text-4xl mb-5 group-hover:scale-110 transition">
+              <div className="text-4xl mb-6 group-hover:scale-110 transition">
                 {service.icon}
               </div>
 
@@ -104,7 +146,7 @@ export default function ServicesIndex() {
                 {service.title}
               </h3>
 
-              {/* Buttons */}
+              {/* Items */}
               <div className="flex flex-col gap-3">
                 {service.items.map((item, i) => (
                   <button
@@ -114,7 +156,7 @@ export default function ServicesIndex() {
                       navigate(service.path);
                     }}
                     className="
-                      flex justify-between items-center
+                      group/item flex items-center justify-between
                       px-4 py-2 rounded-lg
                       bg-white/5 border border-white/10
                       text-sm text-gray-300
@@ -124,14 +166,25 @@ export default function ServicesIndex() {
                       transition-all
                     "
                   >
-                    {item}
-                    <span className="text-[#00b3b6]">→</span>
+                    <span>{item}</span>
+                    <span className="
+                      text-[#00b3b6]
+                      opacity-0 translate-x-[-6px]
+                      group-hover/item:opacity-100
+                      group-hover/item:translate-x-0
+                      transition-all
+                    ">
+                      →
+                    </span>
                   </button>
                 ))}
               </div>
-            </div>
+
+              {/* Hover Glow */}
+              <span className="absolute inset-0 rounded-2xl bg-[#00b3b6]/5 opacity-0 group-hover:opacity-100 transition pointer-events-none" />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

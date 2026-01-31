@@ -9,7 +9,9 @@ body,
 #root {
   min-height: 100%;
   background-color: #020617; /* solid dark base */
-  overscroll-behavior: none;
+  overflow-x: hidden;   /* keep horizontal clean */
+  overflow-y: auto;     /* ✅ allow native vertical scroll */
+  overscroll-behavior-y: auto; /* ✅ restore browser gestures */
 }
 
 html {

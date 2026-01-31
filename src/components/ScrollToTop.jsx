@@ -5,10 +5,7 @@ export default function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // remove if you want instant jump
-    });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
 
   return null;
