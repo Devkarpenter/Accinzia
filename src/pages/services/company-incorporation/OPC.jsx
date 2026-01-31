@@ -1,17 +1,20 @@
-import SubServiceLayout from "../../../components/SubServiceLayout";
-
-export default function PrivateLimited() {
+export default function OPC() {
   return (
-    <SubServiceLayout
-      title="Private Limited Company Registration"
-      description="The most popular business structure for startups and growing companies in India."
-      features={[
-        { title: "Limited Liability", description: "Protects personal assets of directors." },
-        { title: "Easy Fundraising", description: "Preferred by investors and VCs." },
-        { title: "Separate Legal Entity", description: "Company has its own legal identity." },
-        { title: "Complete Compliance", description: "ROC filings handled by experts." },
-      ]}
-      ctaText="Register Pvt Ltd Company"
-    />
+    <section className="reveal py-32 max-w-5xl mx-auto px-4">
+      <h1 className="text-4xl font-bold text-[#00b3b6] mb-6">
+        One Person Company (OPC)
+      </h1>
+
+      <p className="text-gray-400 mb-8">
+        Perfect for solo founders who want corporate benefits with full control.
+      </p>
+
+      <ul className="space-y-3 text-gray-300">
+        <li>• Single owner structure</li>
+        <li>• Limited liability</li>
+        <li>• Less compliance than Pvt Ltd</li>
+        <li>• Ideal for freelancers & consultants</li>
+      </ul>
+    </section>
   );
 }

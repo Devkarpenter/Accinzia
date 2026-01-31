@@ -1,5 +1,46 @@
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+/* =====================
+   Animation Variants
+===================== */
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const fromLeft = {
+  hidden: { opacity: 0, x: -100 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const fromRight = {
+  hidden: { opacity: 0, x: 100 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function HorizontalServicesScroll() {
   const scrollRef = useRef(null);
@@ -59,6 +100,9 @@ export default function HorizontalServicesScroll() {
 
   const items = [...services, ...services];
 
+  /* =====================
+     Auto Scroll Logic
+  ===================== */
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -79,13 +123,19 @@ export default function HorizontalServicesScroll() {
 
   return (
     <section
-      className="reveal py-20"
+      className="reveal py-24"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <div className="max-w-7xl mx-auto px-4">
-        {/* Heading */}
-        <div className="text-center mb-14">
+
+        {/* ================= Heading ================= */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          className="text-center mb-16"
+        >
           <h2 className="text-5xl md:text-6xl font-bold mb-4">
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent tracking-wider">
               OUR SERVICES
@@ -94,23 +144,30 @@ export default function HorizontalServicesScroll() {
           <p className="text-gray-400 max-w-2xl mx-auto">
             Business-focused services crafted to help you launch, protect, and scale with confidence.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Scroll Container */}
+        {/* ================= Scroll Container ================= */}
         <div
           ref={scrollRef}
-          className="flex gap-8 px-2 pt-8 pb-12 no-scrollbar"
+          className="flex gap-8 px-2 pt-8 pb-14 no-scrollbar"
         >
           {items.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={index % 2 === 0 ? fromLeft : fromRight}
+              initial="hidden"
+              animate="show"
+              whileHover={{ y: -8 }}
+              transition={{ duration: 0.4 }}
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
-              className="flex-shrink-0 w-80 rounded-2xl
-                         bg-gradient-to-br from-slate-800/80 to-slate-900/80
-                         border border-white/10 backdrop-blur-xl
-                         p-8 transition-all duration-300
-                         hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20"
+              className="
+                flex-shrink-0 w-80 rounded-2xl
+                bg-gradient-to-br from-slate-800/80 to-slate-900/80
+                border border-white/10 backdrop-blur-xl
+                p-8
+                hover:shadow-2xl hover:shadow-blue-500/20
+              "
             >
               <div className="text-4xl mb-4">{service.icon}</div>
 
@@ -128,17 +185,22 @@ export default function HorizontalServicesScroll() {
               >
                 Learn more →
               </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Helper Text */}
-        <p className="text-center text-gray-500 text-sm mt-6">
+        {/* ================= Helper Text ================= */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          className="text-center text-gray-500 text-sm mt-6"
+        >
           Auto-scroll pauses on hover • Click a card to explore
-        </p>
+        </motion.p>
       </div>
 
-      {/* Scrollbar Kill */}
+      {/* ================= Scrollbar Kill ================= */}
       <style>{`
         .no-scrollbar {
           overflow-x: scroll;

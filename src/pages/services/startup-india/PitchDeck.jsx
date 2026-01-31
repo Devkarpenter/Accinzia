@@ -1,17 +1,19 @@
-import SubServiceLayout from "../../../components/SubServiceLayout";
-
-export default function StartupCertification() {
+export default function PitchDeck() {
   return (
-    <SubServiceLayout
-      title="Startup India Certification"
-      description="Get DPIIT recognition and unlock tax exemptions and funding benefits."
-      features={[
-        { title: "DPIIT Recognition", description: "Official government certification." },
-        { title: "Tax Benefits", description: "Income tax exemption up to 3 years." },
-        { title: "Funding Access", description: "Eligibility for government grants." },
-        { title: "Fast Processing", description: "Handled end-to-end by experts." },
-      ]}
-      ctaText="Apply for Startup India"
-    />
+    <section className="reveal py-32 max-w-5xl mx-auto px-4">
+      <h1 className="text-4xl font-bold text-[#00b3b6] mb-6">
+        Pitch Deck
+      </h1>
+
+      <p className="text-gray-400 mb-10">
+        Professionally designed pitch decks to impress investors and incubators.
+      </p>
+
+      <ul className="space-y-4 text-gray-300">
+        <li>• Investor-ready Design</li>
+        <li>• Market & Financial Storytelling</li>
+        <li>• Funding-focused Structure</li>
+      </ul>
+    </section>
   );
 }
