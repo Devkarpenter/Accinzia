@@ -1,10 +1,39 @@
 @import "tailwindcss";
 
+/* =====================================================
+   GLOBAL BASE RESET (CRITICAL FOR MOBILE)
+===================================================== */
 
-/* ================================
-   Dark Professional Animated Background
-   Minimal • Enterprise • Calm
-================================ */
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: #020617; /* solid dark base */
+  overscroll-behavior: none;
+}
+
+html {
+  background-color: #020617;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  color-scheme: dark;
+}
+
+/* iOS overscroll / rubber-band fix */
+@supports (-webkit-touch-callout: none) {
+  body {
+    overscroll-behavior-y: none;
+  }
+}
+
+/* =====================================================
+   DARK PROFESSIONAL ANIMATED BACKGROUND
+   Calm • Enterprise • Premium
+===================================================== */
 
 body {
   background:
@@ -23,17 +52,12 @@ body {
       rgba(99, 102, 241, 0.025),
       transparent 70%
     ),
-    linear-gradient(
-      to bottom,
-      #020617,
-      #020617
-    );
+    linear-gradient(to bottom, #020617, #020617);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color-scheme: dark;
 }
 
-/* Ultra-subtle motion layer */
+/* Ultra subtle animated ambient layer */
 body::before {
   content: "";
   position: fixed;
@@ -57,7 +81,6 @@ body::before {
   will-change: transform;
 }
 
-/* Extremely slow movement */
 @keyframes ambient-shift {
   0% {
     transform: translate(0, 0);
@@ -69,3 +92,95 @@ body::before {
     transform: translate(0, 0);
   }
 }
+
+/* =====================================================
+   SCROLL REVEAL ANIMATIONS
+===================================================== */
+
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms cubic-bezier(.2,.9,.2,1),
+    transform 700ms cubic-bezier(.2,.9,.2,1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade left */
+.reveal-left.reveal-init {
+  transform: translateX(-24px);
+}
+.reveal-left.reveal-visible {
+  transform: translateX(0);
+}
+
+/* Fade right */
+.reveal-right.reveal-init {
+  transform: translateX(24px);
+}
+.reveal-right.reveal-visible {
+  transform: translateX(0);
+}
+
+/* Stagger utility */
+.reveal-stagger .reveal {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* =====================================================
+   SERVICE CARDS
+===================================================== */
+
+.service-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(
+    to bottom right,
+    rgba(15,23,42,0.7),
+    rgba(2,6,23,0.8)
+  );
+  border: 1px solid rgba(0,179,182,0.3);
+  color: white;
+  font-size: 0.95rem;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: #00b3b6;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,179,182,0.3);
+}
+
+/* =====================================================
+   PAGE HEADINGS
+===================================================== */
+
+.page-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #00b3b6;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: #9ca3af;
+  margin-bottom: 4rem;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* iOS overscroll fix */
+@supports (-webkit-touch-callout: none) {
+  body {
+    overscroll-behavior-y: none;
+  }
+}
+
