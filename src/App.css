@@ -64,6 +64,24 @@
   margin-inline: auto;
 }
 
+html,
+body {
+  background: radial-gradient(
+      1200px circle at 50% 0%,
+      rgba(0, 179, 182, 0.15),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      #020617 0%,
+      #020617 100%
+    );
+  min-height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
+
 
 
 

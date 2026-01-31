@@ -52,7 +52,7 @@ const stagger = {
 
 export default function HeroSection() {
   return (
-    <section className="reveal pt-32 pb-20 px-4 min-h-[650px] flex items-center">
+    <section className="reveal pt-32 pb-20 px-4 min-h-[100svh] flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-14 items-center">
 

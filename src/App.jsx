@@ -75,7 +75,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen  from-slate-950 via-slate-900 to-slate-950">
+      <div className="flex flex-col min-h-[100svh]  from-slate-950 via-slate-900 to-slate-950">
 
         {/* Background glow */}
         <div className="fixed inset-0 -z-10 pointer-events-none">
