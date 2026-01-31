@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -73,7 +74,8 @@ import AIAutomation from "./pages/services/it-automation/AIAutomation";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <ScrollToTop />
+      <div className="flex flex-col min-h-screen  from-slate-950 via-slate-900 to-slate-950">
 
         {/* Background glow */}
         <div className="fixed inset-0 -z-10 pointer-events-none">

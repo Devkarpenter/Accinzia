@@ -1,51 +1,26 @@
 import { motion } from "framer-motion";
 
 /* =====================
-   Animation Variants
+   Calm Animation Variants
 ===================== */
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 60 },
+const sectionFade = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { duration: 1.2, ease: "easeOut" },
+  },
+};
+
+const cardFade = {
+  hidden: { opacity: 0, y: 30, scale: 0.96 },
   show: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
-      duration: 1.2,
+      duration: 0.9,
       ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const fromLeft = {
-  hidden: { opacity: 0, x: -120 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 1.3,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const fromRight = {
-  hidden: { opacity: 0, x: 120 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 1.3,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const stagger = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.22,
-      delayChildren: 0.3,
     },
   },
 };
@@ -102,7 +77,7 @@ export default function ValuesSection() {
 
         {/* ================= Header ================= */}
         <motion.div
-          variants={fadeUp}
+          variants={sectionFade}
           initial="hidden"
           animate="show"
           className="text-center mb-20"
@@ -119,26 +94,24 @@ export default function ValuesSection() {
         </motion.div>
 
         {/* ================= Values Grid ================= */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="show"
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {values.map((value, index) => (
             <motion.div
               key={index}
-              variants={index % 2 === 0 ? fromLeft : fromRight}
-              whileHover={{ y: -10 }}
-              transition={{ duration: 0.4 }}
+              variants={cardFade}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.3 }}
               className="
                 group bg-white/5 backdrop-blur-lg
                 border border-white/10
                 p-8 rounded-xl
                 hover:bg-white/10
                 hover:border-cyan-400/50
-                hover:shadow-2xl hover:shadow-cyan-500/20
-                transition-all duration-300
+                hover:shadow-xl hover:shadow-cyan-500/15
+                transition-colors duration-300
               "
             >
               <div className="text-5xl mb-4">{value.icon}</div>
@@ -159,7 +132,7 @@ export default function ValuesSection() {
               />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

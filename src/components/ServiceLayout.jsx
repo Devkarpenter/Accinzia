@@ -1,4 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Services() {
   const navigate = useNavigate();
@@ -79,11 +80,39 @@ export default function Services() {
     },
   ];
 
+  /* ===============================
+     Motion Variants
+  =============================== */
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12 },
+    },
+  };
+
+  const card = {
+    hidden: { opacity: 0, y: 30, scale: 0.96 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
     <section className="reveal py-28">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Heading */}
-        <div className="text-center mb-24 animate-fade-up">
+
+        {/* ================= Heading ================= */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-24"
+        >
           <h2 className="text-5xl md:text-6xl font-bold mb-4">
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent tracking-wider">
               OUR SERVICES
@@ -96,15 +125,22 @@ export default function Services() {
             End-to-end business services designed to launch, protect, and scale
             your company with confidence.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-rows-fr">
+        {/* ================= Grid ================= */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-rows-fr"
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              style={{ animationDelay: `${index * 80}ms` }}
-              className={`group relative rounded-2xl p-8
+              variants={card}
+              className={`
+                group relative rounded-2xl p-8 cursor-pointer
                 bg-gradient-to-br from-slate-900/70 to-slate-950/80
                 backdrop-blur-xl
                 border border-[#00b3b6]/25
@@ -112,7 +148,6 @@ export default function Services() {
                 hover:-translate-y-2
                 hover:border-[#00b3b6]
                 hover:shadow-2xl hover:shadow-[#00b3b6]/30
-                animate-card-in
                 ${service.tall ? "lg:row-span-2" : ""}
               `}
               onClick={() => navigate(service.path)}
@@ -130,8 +165,10 @@ export default function Services() {
               {/* Action Buttons */}
               <div className="flex flex-col gap-3">
                 {service.items.map((item, i) => (
-                  <button
+                  <motion.button
                     key={i}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate(service.path);
@@ -157,42 +194,23 @@ export default function Services() {
                     ">
                       →
                     </span>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
 
               {/* Hover overlay */}
               <span className="absolute inset-0 rounded-2xl bg-[#00b3b6]/5 opacity-0 group-hover:opacity-100 transition pointer-events-none" />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Animations */}
+      {/* Glow line animation (kept CSS) */}
       <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes cardIn {
-          from { opacity: 0; transform: translateY(30px) scale(0.96); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
         @keyframes glowLine {
           0%, 100% { box-shadow: 0 0 12px rgba(0,179,182,0.4); }
           50% { box-shadow: 0 0 22px rgba(0,179,182,0.9); }
         }
-
-        .animate-fade-up {
-          animation: fadeUp 0.8s ease-out both;
-        }
-
-        .animate-card-in {
-          animation: cardIn 0.7s ease-out both;
-        }
-
         .animate-glow-line {
           animation: glowLine 2.5s ease-in-out infinite;
         }
