@@ -72,7 +72,7 @@ export default function Contact() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="flex-1 max-w-5xl mx-auto px-4 pt-36 pb-24 w-full"
+      className="flex-1 max-w-5xl mx-auto px-4 pt-26 pb-24 w-full"
     >
       {/* ================= HEADER ================= */}
       <motion.div variants={fadeUp} className="text-center mb-20">

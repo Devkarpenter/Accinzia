@@ -87,7 +87,7 @@ export default function ServicesIndex() {
   ];
 
   return (
-    <section className="pt-40 pb-32 px-4">
+    <section className="pt-26 pb-32 px-4">
       <div className="max-w-7xl mx-auto">
 
         {/* ================= HEADER ================= */}

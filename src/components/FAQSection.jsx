@@ -52,7 +52,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="reveal relative w-full py-20 px-4 overflow-hidden">
+    <section className="reveal relative w-full py-4 px-4 overflow-hidden">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
