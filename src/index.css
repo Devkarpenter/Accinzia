@@ -1,17 +1,15 @@
 @import "tailwindcss";
 
 /* =====================================================
-   GLOBAL BASE RESET (CRITICAL FOR MOBILE)
+   GLOBAL BASE RESET (MOBILE SAFE)
 ===================================================== */
 
 html,
 body,
 #root {
   min-height: 100%;
-  background-color: #020617; /* solid dark base */
-  overflow-x: hidden;   /* keep horizontal clean */
-  overflow-y: auto;     /* ✅ allow native vertical scroll */
-  overscroll-behavior-y: auto; /* ✅ restore browser gestures */
+  background-color: #020617;
+  overflow-x: hidden;
 }
 
 html {
@@ -21,20 +19,17 @@ html {
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   color-scheme: dark;
-}
 
-/* iOS overscroll / rubber-band fix */
-@supports (-webkit-touch-callout: none) {
-  body {
-    overscroll-behavior-y: none;
-  }
+  /* IMPORTANT: allow browser navigation */
+  overflow-y: auto;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* =====================================================
    DARK PROFESSIONAL ANIMATED BACKGROUND
-   Calm • Enterprise • Premium
+   (Mobile Optimized)
 ===================================================== */
 
 body {
@@ -55,11 +50,12 @@ body {
       transparent 70%
     ),
     linear-gradient(to bottom, #020617, #020617);
-  background-attachment: fixed;
+
+  /* 🚫 REMOVE fixed on mobile */
   background-repeat: no-repeat;
 }
 
-/* Ultra subtle animated ambient layer */
+/* Ambient animated layer (safe) */
 body::before {
   content: "";
   position: fixed;
@@ -84,19 +80,13 @@ body::before {
 }
 
 @keyframes ambient-shift {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-2%, -1.5%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-2%, -1.5%); }
+  100% { transform: translate(0, 0); }
 }
 
 /* =====================================================
-   SCROLL REVEAL ANIMATIONS
+   SCROLL REVEAL
 ===================================================== */
 
 .reveal-init {
@@ -113,7 +103,6 @@ body::before {
   transform: translateY(0);
 }
 
-/* Fade left */
 .reveal-left.reveal-init {
   transform: translateX(-24px);
 }
@@ -121,7 +110,6 @@ body::before {
   transform: translateX(0);
 }
 
-/* Fade right */
 .reveal-right.reveal-init {
   transform: translateX(24px);
 }
@@ -129,7 +117,6 @@ body::before {
   transform: translateX(0);
 }
 
-/* Stagger utility */
 .reveal-stagger .reveal {
   transition-delay: var(--reveal-delay, 0ms);
 }
@@ -149,7 +136,6 @@ body::before {
   border: 1px solid rgba(0,179,182,0.3);
   color: white;
   font-size: 0.95rem;
-  text-align: left;
   transition: all 0.3s ease;
 }
 
@@ -178,11 +164,3 @@ body::before {
   max-width: 640px;
   margin-inline: auto;
 }
-
-/* iOS overscroll fix */
-@supports (-webkit-touch-callout: none) {
-  body {
-    overscroll-behavior-y: none;
-  }
-}
-
