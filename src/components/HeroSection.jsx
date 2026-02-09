@@ -1,41 +1,41 @@
 import { motion } from "framer-motion";
 
 /* =====================
-   Slower Animation Variants
+   Animation Variants
 ===================== */
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 40 },
   show: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1.2,          // ⏳ slower
-      ease: [0.22, 1, 0.36, 1] // smooth, premium easing
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
 const fromLeft = {
-  hidden: { opacity: 0, x: -120 },
+  hidden: { opacity: 0, x: -80 },
   show: {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 1.4,          // ⏳ slower
-      ease: [0.22, 1, 0.36, 1]
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
 const fromRight = {
-  hidden: { opacity: 0, x: 120 },
+  hidden: { opacity: 0, x: 80 },
   show: {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 1.4,          // ⏳ slower
-      ease: [0.22, 1, 0.36, 1]
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -44,15 +44,17 @@ const stagger = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.25,  // ⏳ slower stagger
-      delayChildren: 0.3,
+      staggerChildren: 0.2,
     },
   },
 };
 
+/* =====================
+   Main Hero Section
+===================== */
 export default function HeroSection() {
   return (
-    <section className="reveal pt-32 pb-20 px-4 min-h-[calc(100svh-5rem)] flex items-center">
+    <section className="pt-32 pb-40 px-4 min-h-[calc(100svh-5rem)] flex items-center relative">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-14 items-center">
 
@@ -94,7 +96,9 @@ export default function HeroSection() {
               animate="show"
               className="space-y-4 pt-6"
             >
-              <h2 className="text-2xl font-bold text-white">What We Do</h2>
+              <h2 className="text-2xl font-bold text-white">
+                What We Do
+              </h2>
 
               <ul className="space-y-4 text-gray-300">
                 {[
@@ -106,6 +110,7 @@ export default function HeroSection() {
                   <motion.li
                     key={index}
                     variants={fadeUp}
+                    whileHover={{ x: 8 }}
                     className="flex items-start gap-3"
                   >
                     <span className="text-blue-400 font-bold">✓</span>
@@ -115,11 +120,12 @@ export default function HeroSection() {
               </ul>
             </motion.div>
 
+            {/* CTA Button */}
             <motion.button
               variants={fadeUp}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
               className="
                 mt-10
                 bg-gradient-to-r from-blue-600 to-purple-600
@@ -138,9 +144,10 @@ export default function HeroSection() {
             animate="show"
             className="space-y-7"
           >
+            {/* Core Values Card */}
             <motion.div
               whileHover={{ scale: 1.015 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
               className="
                 bg-white/10 backdrop-blur-xl
                 border border-white/20
@@ -159,28 +166,37 @@ export default function HeroSection() {
                   ["⭐ EXCELLENCE", "Commitment to delivering nothing less than the best"],
                 ].map(([title, desc], i) => (
                   <div key={i}>
-                    <h4 className="font-semibold text-white mb-2">{title}</h4>
-                    <p className="text-gray-300">{desc}</p>
+                    <h4 className="font-semibold text-white mb-2">
+                      {title}
+                    </h4>
+                    <p className="text-gray-300">
+                      {desc}
+                    </p>
                   </div>
                 ))}
               </div>
             </motion.div>
 
+            {/* Contact Card */}
             <motion.div
               whileHover={{ scale: 1.015 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
               className="
-                bg-gradient-to-br from-blue-500/20 to-purple-500/20
-                border border-blue-400/30
+                bg-white/10 backdrop-blur-xl
+                border border-white/20
                 rounded-2xl p-9
               "
             >
-              <h4 className="text-lg font-bold text-white mb-4">📍 Location</h4>
+              <h4 className="text-lg font-bold text-white mb-4">
+                📍 Location
+              </h4>
               <p className="text-gray-300 mb-5">
                 B-521A, Plot No A-40, Sector 62, Noida, UP - 201301
               </p>
 
-              <h4 className="text-lg font-bold text-white mb-4">📞 Contact</h4>
+              <h4 className="text-lg font-bold text-white mb-4">
+                📞 Contact
+              </h4>
               <p className="text-gray-300 mb-2">
                 Phone:{" "}
                 <a
