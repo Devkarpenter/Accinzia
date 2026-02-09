@@ -2,11 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
 
+/* =========================
+   Layout
+========================= */
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 /* =========================
-   Main pages
+   Main Pages
 ========================= */
 import Home from "./pages/Home";
 import DiscoverUs from "./pages/DiscoverUs";
@@ -15,7 +18,12 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 
 /* =========================
-   Services landing page
+   Magazine Article Page
+========================= */
+import MagazineArticle from "./pages/services/magazine/MagazineArticle";
+
+/* =========================
+   Services Landing
 ========================= */
 import Services from "./pages/services";
 
@@ -75,8 +83,8 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col relative">
 
+      <div className="min-h-screen flex flex-col relative">
         {/* Background glow */}
         <div className="fixed inset-0 -z-10 pointer-events-none">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#00b3b6]/10 rounded-full blur-3xl"></div>
@@ -86,22 +94,23 @@ function App() {
         <Header />
 
         <Routes>
-          {/* Main */}
+          {/* ===== Main Pages ===== */}
           <Route path="/" element={<Home />} />
           <Route path="/discover" element={<DiscoverUs />} />
           <Route path="/magazine" element={<Magazine />} />
+          <Route path="/magazine/:slug" element={<MagazineArticle />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
 
-          {/* Services landing */}
+          {/* ===== Services Landing ===== */}
           <Route path="/services" element={<Services />} />
 
-          {/* Certificates */}
+          {/* ===== Certificates ===== */}
           <Route path="/services/certificates" element={<Certificates />} />
           <Route path="/services/certificates/iso" element={<ISO />} />
           <Route path="/services/certificates/msme" element={<MSME />} />
 
-          {/* Startup India */}
+          {/* ===== Startup India ===== */}
           <Route path="/services/startup-india" element={<StartupIndia />} />
           <Route path="/services/startup-india/certification" element={<Certification />} />
           <Route path="/services/startup-india/seed-fund" element={<SeedFund />} />
@@ -109,7 +118,7 @@ function App() {
           <Route path="/services/startup-india/zoho-credit" element={<ZohoCredit />} />
           <Route path="/services/startup-india/pitch-deck" element={<PitchDeck />} />
 
-          {/* Company Incorporation */}
+          {/* ===== Company Incorporation ===== */}
           <Route path="/services/company-incorporation" element={<CompanyIncorporation />} />
           <Route path="/services/company-incorporation/private-limited" element={<PrivateLimited />} />
           <Route path="/services/company-incorporation/opc" element={<OPC />} />
@@ -117,21 +126,21 @@ function App() {
           <Route path="/services/company-incorporation/partnership" element={<Partnership />} />
           <Route path="/services/company-incorporation/sole-proprietorship" element={<SoleProprietorship />} />
 
-          {/* Trademark */}
+          {/* ===== Trademark ===== */}
           <Route path="/services/trademark" element={<Trademark />} />
           <Route path="/services/trademark/registration" element={<Registration />} />
           <Route path="/services/trademark/renewal" element={<Renewal />} />
           <Route path="/services/trademark/objection" element={<Objection />} />
           <Route path="/services/trademark/opposition" element={<Opposition />} />
 
-          {/* Compliances */}
+          {/* ===== Compliances ===== */}
           <Route path="/services/compliances" element={<Compliances />} />
           <Route path="/services/compliances/gst" element={<GST />} />
           <Route path="/services/compliances/itr" element={<ITR />} />
           <Route path="/services/compliances/mca" element={<MCA />} />
           <Route path="/services/compliances/book-keeping" element={<BookKeeping />} />
 
-          {/* IT & AI Automation */}
+          {/* ===== IT & AI Automation ===== */}
           <Route path="/services/it-automation" element={<ITAutomation />} />
           <Route path="/services/it-automation/web-development" element={<WebDevelopment />} />
           <Route path="/services/it-automation/ai-automation" element={<AIAutomation />} />
