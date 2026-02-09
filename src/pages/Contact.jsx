@@ -64,16 +64,20 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Thank you for reaching out! We will get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
   };
 
   return (
-<<<<<<< HEAD
     <motion.main
       variants={container}
       initial="hidden"
       animate="show"
-      className="flex-1 max-w-5xl mx-auto px-4 pt-26 pb-24 w-full"
+      className="flex-1 max-w-5xl mx-auto px-4 pt-24 pb-24 w-full"
     >
       {/* ================= HEADER ================= */}
       <motion.div variants={fadeUp} className="text-center mb-20">
@@ -86,17 +90,9 @@ export default function Contact() {
           Have a question or need assistance? Our team is ready to help you.
         </p>
       </motion.div>
-=======
-    <main className="reveal flex-1 max-w-4xl mx-auto px-4 py-16 w-full">
-      <h1 className="text-5xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Contact Us</h1>
-      <p className="text-xl text-gray-300 text-center mb-12">
-        Have a question? We'd love to hear from you. Get in touch with us today.
-      </p>
->>>>>>> d16090f6eb0d40e5dd526a443ddb7d3338549676
 
       {/* ================= GRID ================= */}
       <div className="grid md:grid-cols-2 gap-14 items-start">
-
         {/* ========== CONTACT INFO ========== */}
         <motion.div variants={fromLeft} className="space-y-6">
           {[
@@ -121,12 +117,12 @@ export default function Contact() {
                 bg-white/5 backdrop-blur-xl
                 border border-white/10
                 rounded-xl p-7
-                hover:border-[#00b3b6]/40
+                hover:border-cyan-400/40
                 hover:bg-white/10
                 transition
               "
             >
-              <h3 className="text-xl font-semibold text-[#00b3b6] mb-2">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-2">
                 {item.title}
               </h3>
               <p className="text-gray-300">{item.text}</p>
@@ -164,7 +160,7 @@ export default function Contact() {
                   w-full px-4 py-2.5
                   bg-white/5 border border-white/10
                   rounded-lg text-white
-                  focus:outline-none focus:border-[#00b3b6]
+                  focus:outline-none focus:border-cyan-400
                   focus:bg-white/10
                   transition
                 "
@@ -187,7 +183,7 @@ export default function Contact() {
                 w-full px-4 py-2.5
                 bg-white/5 border border-white/10
                 rounded-lg text-white
-                focus:outline-none focus:border-[#00b3b6]
+                focus:outline-none focus:border-cyan-400
                 focus:bg-white/10
                 transition
               "
@@ -201,9 +197,9 @@ export default function Contact() {
             type="submit"
             className="
               w-full py-3.5 rounded-lg
-              bg-gradient-to-r from-[#00b3b6] to-cyan-500
+              bg-gradient-to-r from-cyan-500 to-blue-500
               text-white font-semibold
-              shadow-lg shadow-[#00b3b6]/30
+              shadow-lg shadow-cyan-500/30
             "
           >
             Send Message
